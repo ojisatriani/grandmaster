@@ -1,0 +1,1 @@
+<link rel="stylesheet" media="screen, print" href="{{ asset('backend/css/datagrid/datatables/datatables.bundle.css') }}">

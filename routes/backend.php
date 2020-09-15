@@ -1,0 +1,51 @@
+<?php
+
+/*
+|--------------------------------------------------------------------------
+| Backend Routes
+|--------------------------------------------------------------------------
+|
+|
+*/
+Route::get('ojisatriani/{folder}/{file}', 'jsController@backend');
+Route::get('ojisatriani/{folder}/{id}/{file}', 'jsController@backendWithId');
+
+Route::get('/home', 'berandaController@index')->name('beranda.home');
+Route::group(['prefix' => config('master.url.admin')], function () {
+	// dashboard - beranda
+	Route::get('/', 'berandaController@index')->name('beranda.index');
+	
+	//user ubah password
+	Route::get('user/ubahpassword/{id}', 'userController@ubahpassword')->name('user.ubahpassword');
+	Route::group(['middleware' => ['throttle:10']], function () {
+		Route::post('user/ubahpassword', 'userController@resetpassword')->name('user.store_ubahpassword');
+	});
+	Route::group(['middleware' => ['aksesmenu']], function (){
+
+		//user
+		Route::get('user/hapus/{id}', 'userController@hapus')->name('user.hapus');
+		Route::get('user/data', 'userController@data')->name('user.data');
+		Route::resource('user', 'userController');
+		
+		//menu
+		Route::get('menu/hapus/{id}', 'menuController@hapus')->name('menu.hapus');
+		Route::get('menu/data', 'menuController@data')->name('menu.data');
+		Route::resource('menu', 'menuController');
+
+		//submenu
+		Route::get('submenu/hapus/{id}', 'submenuController@hapus')->name('submenu.hapus');
+		Route::get('submenu/data/{id}', 'submenuController@data')->name('submenu.data');
+		Route::resource('submenu', 'submenuController');
+
+		//aksesgrup
+		Route::get('aksesgrup/hapus/{id}', 'aksesgrupController@hapus')->name('aksesgrup.hapus');
+		Route::get('aksesgrup/data', 'aksesgrupController@data')->name('aksesgrup.data');
+		Route::resource('aksesgrup', 'aksesgrupController');
+
+		//aksesmenu
+		Route::get('aksesmenu/data/{id}', 'aksesmenuController@data')->name('aksesmenu.data');
+		Route::get('aksesmenu/create/{id}', 'aksesmenuController@create')->name('aksesmenu.create_id');
+		Route::resource('aksesmenu', 'aksesmenuController');
+
+	});
+});
