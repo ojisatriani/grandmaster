@@ -12,6 +12,10 @@ cd ojimaster
 ```
 ```
 composer install
+```
+Atur pengaturan database pada file .env
+
+```
 php artisan migrate --seed
 ```
 
