@@ -17,6 +17,7 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^3.0",
         "laravelcollective/html": "^6.1",
+        "laravolt/avatar": "^4.0",
         "ojisatriani/fungsi": "^1.0",
         "yajra/laravel-datatables": "^1.0"
     },

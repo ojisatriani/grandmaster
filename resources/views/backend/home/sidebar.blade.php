@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="info-card">
-            <img src="{{ asset('backend/img/demo/avatars/avatar-admin.png') }}" class="profile-image rounded-circle" alt="Dr. Codex Lantern">
+            <img src="{{ Avatar::create(Auth::user()->nama)->toBase64() }}" class="profile-image rounded-circle" alt="Dr. Codex Lantern">
             <div class="info-card-text">
                 <a href="#" class="d-flex align-items-center text-white">
                     <span class="text-truncate text-truncate-sm d-inline-block">
