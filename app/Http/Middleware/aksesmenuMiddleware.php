@@ -36,7 +36,7 @@ class aksesmenuMiddleware
                     if($aksessub->first()){
                         return $next($request);
                     }else{
-                        return redirect(config('master.url.admin'));
+                        return new Response(view('backend.home.error.403', ['submenu'=>$submenu]));
                     }
                 } else {
                     return new Response(view('backend.home.error.503', ['submenu'=>$submenu]));
@@ -45,7 +45,7 @@ class aksesmenuMiddleware
                 return $next($request);
             }
         }else{
-            return redirect(config('master.url.admin'));
+            new Response(view('backend.home.error.403'));
         }
     }
 }
