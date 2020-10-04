@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Submenu extends Model
 {
     protected $fillable = [
-        'nama', 'kode', 'link', 'icon', 'status', 'tampil','menu_id'
+        'nama', 'kode', 'link', 'icon', 'status', 'tampil','menu_id','perbaikan'
     ];
 
     protected $casts = [
@@ -23,6 +23,11 @@ class Submenu extends Model
     public function aksessubmenu()
     {
         return $this->hasMany('App\Aksessubmenu');
+    }
+
+    public function boleh_akses_submenu()
+    {
+        return $this->hasMany('App\BolehAksesSubmenu');
     }
 
     public function checkAksessubmenu($aksesgrup_id)

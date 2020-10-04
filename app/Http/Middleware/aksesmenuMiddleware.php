@@ -6,6 +6,8 @@ use Closure;
 use Route;
 use App\Submenu;
 use App\Aksessubmenu;
+use Illuminate\Http\Response;
+use App\BolehAksesSubmenu;
 
 class aksesmenuMiddleware
 {
@@ -22,17 +24,26 @@ class aksesmenuMiddleware
         $current	=	explode(".", Route::currentRouteName());
         $submenu	=	Submenu::where('kode', $current[0])->first();
         if($submenu !== NULL){
-            // foreach($submenu as $smn){
-                if($submenu->tampil){
+            if($submenu->tampil){
+                $bolehakses = TRUE;
+                if($submenu->perbaikan)
+                {
+                    $bolehakses = BolehAksesSubmenu::whereAksesgrupId(\Auth::user()->aksesgrup_id)->whereSubmenuId($submenu->id)->first() ?? FALSE;
+                }
+                if($bolehakses)
+                {
                     $aksessub =  Aksessubmenu::where('aksesgrup_id', $user->aksesgrup_id)->where('submenu_id', $submenu->id);
                     if($aksessub->first()){
                         return $next($request);
                     }else{
                         return redirect(config('master.url.admin'));
                     }
-                }else{
-                    return $next($request);
+                } else {
+                    return new Response(view('backend.home.error.503', ['submenu'=>$submenu]));
                 }
+            }else{
+                return $next($request);
+            }
         }else{
             return redirect(config('master.url.admin'));
         }

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Validator;
 use App\Menu;
 use App\Submenu;
+use App\Aksesgrup;
 use Yajra\DataTables\Facades\DataTables;
 
 class submenuController extends Controller
@@ -41,7 +42,8 @@ class submenuController extends Controller
               ->addColumn('tampilkan', function ($submenu) {
                   $status  = $submenu->status == 1 ? '<span class="badge badge-pill badge-info">Tampil</span>':'<span class="badge badge-pill badge-danger">Tidak Tampil</span>';
                   $private = $submenu->tampil == 1 ? '<span class="badge badge-pill badge-primary">Private</span>':'<span class="badge badge-pill badge-success">Public</span>';
-                  return '<center>'.$status .'&nbsp;&nbsp;'. $private.'</center>';
+                  $perbaikan = $submenu->perbaikan == 1 ? '<span class="badge badge-pill badge-danger"><a href="'. url('perbaikan/'.$submenu->id) .'" class="text-white">Perbaikan <i class="fa fa-share"></i></a></span>':'<span class="badge badge-pill badge-success">Aktif</span>';
+                  return '<center>'.$status .'&nbsp;&nbsp;'. $private.'&nbsp;&nbsp;'. $perbaikan.'</center>';
               })
                ->rawColumns(['tampilkan', 'action'])->make(true);
         } else {
@@ -110,7 +112,8 @@ class submenuController extends Controller
     {
         $submenu    = Submenu::find($id);
         $menu       = Menu::all()->pluck('nama', 'id');
-        return view('backend.submenu.ubah', ['submenu' => $submenu, 'menu' => $menu]);
+        $aksesgrup  = Aksesgrup::all()->pluck('nama', 'id');
+        return view('backend.submenu.ubah', ['submenu' => $submenu, 'menu' => $menu, 'aksesgrup' => $aksesgrup]);
     }
 
     /**

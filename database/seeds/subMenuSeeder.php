@@ -64,6 +64,15 @@ class subMenuSeeder extends Seeder
 						'status'	=> 0,
 						'tampil'	=> 1,
 					],
+					[
+						'menu_id'	=> 3, //extra
+						'kode'		=> 'perbaikan',
+						'nama'		=> 'Perbaikan',
+						'link'		=> 'perbaikan',
+						'icon'		=> 'fa-arrow-circle-right',
+						'status'	=> 0,
+						'tampil'	=> 1,
+					],
 				];
 				DB::table('submenus')->insert($isi);
 				Schema::enableForeignKeyConstraints();

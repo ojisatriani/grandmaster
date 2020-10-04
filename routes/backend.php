@@ -46,6 +46,12 @@ Route::group(['prefix' => config('master.url.admin')], function () {
 		Route::get('aksesmenu/data/{id}', 'aksesmenuController@data')->name('aksesmenu.data');
 		Route::get('aksesmenu/create/{id}', 'aksesmenuController@create')->name('aksesmenu.create_id');
 		Route::resource('aksesmenu', 'aksesmenuController');
+		
+		//perbaikan
+		Route::get('perbaikan/data/{id}', 'perbaikanController@data')->name('perbaikan.data');
+		Route::get('perbaikan/hapus/{id}', 'perbaikanController@hapus')->name('perbaikan.hapus');
+		Route::get('perbaikan/create/{id}', 'perbaikanController@create')->name('perbaikan.create_id');
+		Route::resource('perbaikan', 'perbaikanController');
 
 	});
 });

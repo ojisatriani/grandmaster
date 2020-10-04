@@ -31,6 +31,10 @@
 			{!! Form::label('tampil', 'Tampilkan', array('class' => 'col-md-6 control-label')) !!}
 			{!! Form::select('tampil', array(1 => 'Private', 0 => 'Public'), $submenu->tampil, array('id' => 'tampil', 'class' => 'form-control')) !!}
 		</p>
+		<p>
+			{!! Form::label('perbaikan', 'Perbaikan', array('class' => 'col-md-6 control-label')) !!}
+			{!! Form::select('perbaikan', array(1 => 'Ya', 0 => 'Tidak'), $submenu->perbaikan, array('id' => 'tampil', 'class' => 'form-control')) !!}
+		</p>
 	</div>
 		{!! Form::hidden('url', URL::previous(), array('id' => 'url')) !!}
 		{!! Form::hidden('id', $submenu->id, array('id' => 'id')) !!}
