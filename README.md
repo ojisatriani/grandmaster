@@ -12,11 +12,23 @@ cd ojimaster
 ```
 ```
 composer install
+chmod -R guo+w storage
+cp .env.example .env
 ```
 Atur pengaturan database pada file .env
 
 ```
-php artisan migrate --seed
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=grandmaster
+DB_USERNAME=root
+DB_PASSWORD=
+```
+Migrate database dan seeder
+
+```
+php artisan migrate --seed #username dan password akan muncul setelah migrate
 ```
 
 ## Owner
