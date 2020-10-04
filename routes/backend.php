@@ -40,6 +40,7 @@ Route::group(['prefix' => config('master.url.admin')], function () {
 		//aksesgrup
 		Route::get('aksesgrup/hapus/{id}', 'aksesgrupController@hapus')->name('aksesgrup.hapus');
 		Route::get('aksesgrup/data', 'aksesgrupController@data')->name('aksesgrup.data');
+		Route::get('aksesgrup/detail/data/{id}', 'aksesgrupController@data_detail')->name('aksesgrup.data_detail');
 		Route::resource('aksesgrup', 'aksesgrupController');
 
 		//aksesmenu

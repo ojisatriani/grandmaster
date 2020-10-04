@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Validator;
 use App\Aksesgrup;
+use App\User;
 use Yajra\DataTables\Facades\DataTables;
 
 class aksesgrupController extends Controller
@@ -25,6 +26,9 @@ class aksesgrupController extends Controller
             $aksesgrup = Aksesgrup::byLevel();
             return Datatables::of($aksesgrup)
             ->addIndexColumn()
+            ->editColumn('nama', function($aksesgrup){
+                return '<a href="'.url('aksesgrup/'.$aksesgrup->id).'" class="text-info">'.$aksesgrup->nama.'</a>';
+            })
              ->addColumn(
                  'action',
                            '<center>
@@ -37,7 +41,18 @@ class aksesgrupController extends Controller
                            </center>'
                         )
               ->addColumn('aksesmenu', '<center><a href="{{ url(config("master.url.admin")."/aksesmenu/".$id)  }}" class="ubah" data-toggle="tooltip" data-placement="top" title="Akses Menu"><i class="fa fa-external-link text-info"></i></a>')
-              ->rawColumns(['action', 'aksesmenu'])->make(true);
+              ->rawColumns(['action', 'aksesmenu', 'nama'])->make(true);
+        } else {
+            exit("Not an AJAX request -_-");
+        }
+    }
+
+    public function data_detail(Request $request, $id)
+    {
+        if ($request->ajax()) {
+            $users = Aksesgrup::find($id)->user;
+            return Datatables::of($users)
+            ->addIndexColumn()->make(true);
         } else {
             exit("Not an AJAX request -_-");
         }
@@ -85,7 +100,8 @@ class aksesgrupController extends Controller
      */
     public function show($id)
     {
-        //
+        $aksesgrup = Aksesgrup::find($id);
+        return view('backend.aksesgrup.detail', compact('aksesgrup'));
     }
 
     /**
