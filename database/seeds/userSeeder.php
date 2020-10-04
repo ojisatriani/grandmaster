@@ -9,15 +9,15 @@ class userSeeder extends Seeder
      *
      * @return void
      */
-    public $userpass = 'admin';
+    public $userpass = 'root';
     public function run()
     {
         Schema::disableForeignKeyConstraints();
         
         DB::table('users')->insert([
-                    'nama'                  => 'Administrator',
+                    'nama'                  => 'Root Administrator',
                     'username'              => $this->userpass,
-                    'email'                 => 'admin@google.com',
+                    'email'                 => 'root@google.com',
                     'password'              => bcrypt($this->userpass),
                     'aksesgrup_id'          => 1,
                     'level'                 => 1,
