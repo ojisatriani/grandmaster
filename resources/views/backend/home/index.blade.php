@@ -21,6 +21,9 @@
         <link rel="mask-icon" href="{{ asset('backend/img/favicon/safari-pinned-tab.svg') }}" color="#5bbad5">
         <link rel="stylesheet" media="screen, print" href="{{ asset('resources/vendor/font-awesome/css/font-awesome.min.css') }}">
         <link rel="stylesheet" media="screen, print" href="{{ asset('resources/css/sweetalert2/sweetalert2.bundle.css') }}">
+        @if (config('master.aplikasi.tema') != NULL)
+            <link id="mytheme" rel="stylesheet" href="{{ asset('backend/css/themes/cust-theme-'. config('master.aplikasi.tema') .'.css') }}">
+        @endif
         @stack('css')
     </head>
     <body class="mod-bg-1 ">
