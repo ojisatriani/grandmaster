@@ -14,6 +14,7 @@ return [
                         'singkatan'     => 'GM',
                         'logo'		    => env('APP_URL').'/img/logo.png',
                         'tema'          => NULL, // 1,2,3,4,5,6,7,8,9,10,11,12,13
+                        'login_versi'   => 2, // 1,2
                     ],
     'aksesgrup' =>  [
                         'root'      =>  [

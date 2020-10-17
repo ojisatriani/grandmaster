@@ -42,4 +42,14 @@ class LoginController extends Controller
     {
         return 'username';
     }
+
+    public function showLoginForm()
+    {
+        if (config('master.aplikasi.login_versi') == 2) {
+            return view('auth.login_2');
+        } else {
+            return view('auth.login');
+        }
+        
+    }
 }
