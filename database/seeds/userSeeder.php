@@ -17,7 +17,7 @@ class userSeeder extends Seeder
         DB::table('users')->insert([
                     'nama'                  => 'Root Administrator',
                     'username'              => $this->userpass,
-                    'email'                 => 'root@google.com',
+                    'email'                 => $this->userpass.'@google.com',
                     'password'              => bcrypt($this->userpass),
                     'aksesgrup_id'          => 1,
                     'level'                 => 1,
