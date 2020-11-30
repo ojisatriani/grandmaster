@@ -14,7 +14,7 @@ class CreateLoginlogsTable extends Migration
     public function up()
     {
         Schema::create('loginlogs', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->string('username')->nullable();
             $table->ipAddress('ip')->nullable();
             $table->boolean('berhasil')->default(false);

@@ -14,13 +14,11 @@ class CreateAksesmenusTable extends Migration
     public function up()
     {
         Schema::create('aksesmenus', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('menu_id')->nullable();
-            $table->unsignedInteger('aksesgrup_id')->nullable();
+            $table->id();
+            $table->foreignId('menu_id')->nullable()->constrained()->onDelete('CASCADE');
+            $table->foreignId('aksesgrup_id')->nullable()->constrained()->onDelete('CASCADE');
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('menu_id')->references('id')->on('menus')->onDelete('CASCADE');
-            $table->foreign('aksesgrup_id')->references('id')->on('aksesgrups')->onDelete('cascade');
         });
     }
 

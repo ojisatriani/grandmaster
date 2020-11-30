@@ -14,7 +14,7 @@ class CreateAksesgrupsTable extends Migration
     public function up()
     {
         Schema::create('aksesgrups', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('nama');
             $table->string('alias')->nullable()->unique();
             $table->timestamps();
