@@ -1,4 +1,4 @@
-{!! Form::open(array('id' => 'frmOji', 'class' => 'form account-form', 'method' => 'post')) !!}
+{!! Form::open(array('id' => 'frmOji', 'route' => ['menu.store'], 'class' => 'form account-form', 'method' => 'post')) !!}
 <div class="row">
 	<div class="col-md-6">
 		<p>
@@ -28,13 +28,19 @@
 			{!! Form::select('tampil', array(1 => 'Private', 0 => 'Public'), NULL, array('id' => 'tampil', 'class' => 'form-control')) !!}
 		</p>
 	</div>
-	{!! Form::hidden('url', URL::previous(), array('id' => 'url')) !!}
+	{!! Form::hidden('table-list', 'datatable', array('id' => 'table-list')) !!}
 </div>
 <div class="row">
-		<div class="col-md-12">
-				<span class="pesan"></span>
-		</div>
+	<div class="col-md-12">
+        <span class="pesan"></span>
+        <div id="output"></div>
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                <div id="statustxt">0%</div>
+            </div>
+        </div>
+	</div>
 </div>
 {!! Form::close() !!}
-<script src="{{ URL::asset('ojisatriani/menu/ajax.js') }}"></script>
-<script src="{{ URL::asset('ojisatriani/home/ajax.js') }}"></script>
+<script src="{{ URL::asset('resources/vendor/jquery/jquery.form.js') }}"></script>
+<script src="{{ URL::asset('ojisatriani/home/ajax_progress.js') }}"></script>

@@ -41,7 +41,7 @@ $(document).ready(function () {
 		serverSide: true,
 		ajax: "{{ url($url_admin.'/perbaikan/data/'.$id) }}",
 		columns: [
-			{ data: 'aksesgrup.nama' },
+			{ data: 'nama' },
 			{ data: 'action', orderable: false, searchable: false }
 		]
 	});
