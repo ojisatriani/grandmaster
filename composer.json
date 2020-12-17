@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.3",
         "doctrine/dbal": "^2.10",
+        "dyrynda/laravel-cascade-soft-deletes": "^4.1",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",
         "guzzlehttp/guzzle": "^7.0.1",
@@ -19,7 +20,6 @@
         "laravelcollective/html": "^6.1",
         "laravolt/avatar": "^4.0",
         "ojisatriani/fungsi": "^1.0",
-        "dyrynda/laravel-cascade-soft-deletes": "^4.0",
         "yajra/laravel-datatables": "^1.0"
     },
     "require-dev": {
