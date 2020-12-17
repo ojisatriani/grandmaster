@@ -19,6 +19,7 @@
         "laravelcollective/html": "^6.1",
         "laravolt/avatar": "^4.0",
         "ojisatriani/fungsi": "^1.0",
+        "dyrynda/laravel-cascade-soft-deletes": "^4.0",
         "yajra/laravel-datatables": "^1.0"
     },
     "require-dev": {
