@@ -15,12 +15,10 @@ class CreateBolehAksesSubmenusTable extends Migration
     {
         Schema::create('boleh_akses_submenus', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('submenu_id')->nullable();
-            $table->unsignedInteger('aksesgrup_id')->nullable();
+            $table->foreignId('submenu_id')->nullable()->constrained()->onDelete('CASCADE');
+            $table->foreignId('aksesgrup_id')->nullable()->constrained()->onDelete('CASCADE');
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('submenu_id')->references('id')->on('submenus')->onDelete('CASCADE');
-            $table->foreign('aksesgrup_id')->references('id')->on('aksesgrups')->onDelete('cascade');
         });
     }
 

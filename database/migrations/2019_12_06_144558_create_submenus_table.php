@@ -14,8 +14,8 @@ class CreateSubmenusTable extends Migration
     public function up()
     {
         Schema::create('submenus', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('menu_id')->nullable();
+            $table->id();
+            $table->foreignId('menu_id')->nullable()->constrained()->onDelete('CASCADE');
             $table->string('kode', 50)->unique();
             $table->string('nama');
             $table->string('link');
@@ -25,7 +25,6 @@ class CreateSubmenusTable extends Migration
             $table->boolean('perbaikan')->default(0);
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('menu_id')->references('id')->on('menus')->onDelete('CASCADE');
         });
     }
 
