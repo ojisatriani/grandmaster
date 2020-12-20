@@ -7,7 +7,7 @@ Cara Install
 
 Via Terminal:
 ```
-composer create-project --prefer-dist ojisatriani/grandmaster ojimaster
+composer create-project ojisatriani/grandmaster ojimaster
 cd ojimaster
 ```
 ```
