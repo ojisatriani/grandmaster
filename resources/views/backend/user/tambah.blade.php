@@ -1,6 +1,6 @@
 {!! Form::open(array('id' => 'frmOji', 'class' => 'form account-form', 'method' => 'post')) !!}
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-6">
         <p>
             {!! Form::label('Nama', 'Nama', array('class' => 'col-md-6 control-label')) !!}
             {!! Form::text('nama', NULL, array('id' => 'nama', 'class' => 'form-control', 'placeholder' => 'Nama')) !!}
