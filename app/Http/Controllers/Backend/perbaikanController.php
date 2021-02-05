@@ -26,8 +26,12 @@ class perbaikanController extends Controller
     {
         // cek ajax request
         if ($request->ajax()) {
-            $bolehakses = Submenu::find($id)->boleh_akses_submenu()->with('aksesgrup');
+            // $bolehakses = Submenu::find($id)->boleh_akses_submenu()->with('aksesgrup');
+            $bolehakses = BolehAksesSubmenu::latest()->whereSubmenuId($id);
             return Datatables::of($bolehakses)
+            ->addColumn('nama', function($bolehakses){
+                return $bolehakses->aksesgrup->nama;
+            })
              ->addColumn(
                  'action',
                            '<center>
