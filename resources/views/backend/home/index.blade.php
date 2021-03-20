@@ -100,6 +100,13 @@
                                 {{ $fungsi->getHari() }}, {{ $fungsi->tanggalIndonesia() }}
                                 </li>
                             </ol>
+                            @if ($halaman != NULL)
+                                @if ($halaman->pengumuman != NULL)
+                                    <div class="panel-tag">
+                                        {{ $halaman->pengumuman }}
+                                    </div>
+                                @endif
+                            @endif
                             <div class="row">
                                 <div class="col-xl-12">
                                     <div id="panel-1" class="panel">

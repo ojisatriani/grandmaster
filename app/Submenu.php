@@ -15,7 +15,7 @@ class Submenu extends Model
     protected $dates = ['deleted_at'];
     
     protected $fillable = [
-        'nama', 'kode', 'link', 'icon', 'status', 'tampil','menu_id','perbaikan'
+        'nama', 'kode', 'link', 'icon', 'status', 'tampil','menu_id','perbaikan', 'pengumuman'
     ];
 
     protected $casts = [

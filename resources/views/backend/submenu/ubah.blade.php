@@ -36,6 +36,12 @@
 			{!! Form::select('perbaikan', array(1 => 'Ya', 0 => 'Tidak'), $submenu->perbaikan, array('id' => 'tampil', 'class' => 'form-control')) !!}
 		</p>
 	</div>
+	<div class="col-md-12">
+		<p>
+			{!! Form::label('pengumuman', 'Pengumuman', array('class' => 'col-md-6 control-label')) !!}
+			{!! Form::textarea('pengumuman', $submenu->pengumuman, array('id' => 'pengumuman', 'class' => 'form-control', 'placeholder' => 'Pengumuman')) !!}
+		</p>
+	</div>
 	{!! Form::hidden('table-list', 'datatable', array('id' => 'table-list')) !!}
 </div>
 <div class="row">

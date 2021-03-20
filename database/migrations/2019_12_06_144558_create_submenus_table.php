@@ -23,6 +23,7 @@ class CreateSubmenusTable extends Migration
             $table->boolean('status')->default(1);
             $table->boolean('tampil')->default(1);
             $table->boolean('perbaikan')->default(0);
+            $table->text('pengumuman')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

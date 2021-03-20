@@ -28,6 +28,12 @@
 			{!! Form::select('tampil', array(1 => 'Private', 0 => 'Public'), NULL, array('id' => 'tampil', 'class' => 'form-control')) !!}
 		</p>
 	</div>
+	<div class="col-md-12">
+		<p>
+			{!! Form::label('pengumuman', 'Pengumuman', array('class' => 'col-md-6 control-label')) !!}
+			{!! Form::textarea('pengumuman', NULL, array('id' => 'pengumuman', 'class' => 'form-control', 'placeholder' => 'Pengumuman')) !!}
+		</p>
+	</div>
 	{!! Form::hidden('menu_id', NULL, array('id' => 'menu_id')) !!}
 	{!! Form::hidden('table-list', 'datatable', array('id' => 'table-list')) !!}
 </div>
