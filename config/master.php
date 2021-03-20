@@ -19,7 +19,7 @@ return [
     'aksesgrup' =>  [
                         'root'      =>  [
                                             'menu'      => ['pengaturanroot', 'pengaturan', 'extra'],
-                                            'submenu'   => ['menu', 'user', 'aksesgrup', 'aksesmenu', 'submenu','perbaikan'],
+                                            'submenu'   => ['menu', 'user', 'aksesgrup', 'aksesmenu', 'submenu','perbaikan', 'berkas'],
                                         ],
                         'admin'     =>  [
                                             'menu'      => ['extra'],

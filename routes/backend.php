@@ -54,5 +54,11 @@ Route::group(['prefix' => config('master.url.admin')], function () {
 		Route::get('perbaikan/create/{id}', 'perbaikanController@create')->name('perbaikan.create_id');
 		Route::resource('perbaikan', 'perbaikanController');
 
+		//berkas
+		Route::get('berkas/hapus/{id}', 'berkasController@hapus')->name('berkas.hapus');
+		Route::get('berkas/data', 'berkasController@data')->name('berkas.data');
+		Route::get('berkas/download/{id}/{nama}', 'berkasController@download')->name('berkas.download');
+		Route::resource('berkas', 'berkasController');
+
 	});
 });
