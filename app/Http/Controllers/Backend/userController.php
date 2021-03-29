@@ -240,13 +240,13 @@ class userController extends Controller
             } else {
                 if ($user->password == null) {
                     if (User::find($request->input('id'))->update($request->all())) {
-                        $respon = array('status'=>true, 'pesan' => ['msg' => 'Password Berhasil diubah']);
+                        $respon = array('status'=>true, 'next_url'=> $request->next_url, 'pesan' => ['msg' => 'Password Berhasil diubah']);
                     } else {
                         $respon = array('status'=>false, 'pesan' => ['msg' => 'Password Gagal diubah']);
                     }
                 } elseif (\Hash::check(base64_decode(trim($request->input('password_lama'))), \Auth::user()->password) && $user->password != null) {
                     if (User::find($request->input('id'))->update($request->all())) {
-                        $respon = array('status'=>true, 'pesan' => ['msg' => 'Password Berhasil diubah']);
+                        $respon = array('status'=>true, 'next_url'=> $request->next_url, 'pesan' => ['msg' => 'Password Berhasil diubah']);
                     } else {
                         $respon = array('status'=>false, 'pesan' => ['msg' => 'Password Gagal diubah']);
                     }

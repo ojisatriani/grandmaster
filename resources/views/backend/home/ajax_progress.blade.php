@@ -33,14 +33,18 @@ $(document).ready(function() {
 		complete: function(response, x , e) { // on complete
 			var data = $.parseJSON(response.responseText);
 			if(data.status ==true){
-				 $("#"+tablelist).DataTable().ajax.reload();
-				$('.modal').modal('hide');
-				Swal.fire({
-				    title: 'Okay...',
-				    text: 'Berhasil proses data',
-				    type: 'success',
-				    timer: 1500
-				});
+				if (data.hasOwnProperty('next_url')) {
+					location.href= data.next_url;
+				} else {
+					$("#"+tablelist).DataTable().ajax.reload();
+					$('.modal').modal('hide');
+					Swal.fire({
+						title: 'Okay...',
+						text: 'Berhasil proses data',
+						type: 'success',
+						timer: 1500
+					});
+				}
 			}else{
 				progressbox.hide();
 				$('.pesan').html('');
