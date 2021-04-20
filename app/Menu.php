@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Dyrynda\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Route;
 
 class Menu extends Model
 {
@@ -39,9 +40,9 @@ class Menu extends Model
         return $aksesmenu->first() ? true : null;
     }
 
-    public function active($kode)
+    public function getAktifAttribute()
     {
-        $current	=	explode("/", $kode);
+        $current	=	explode(".", Route::currentRouteName());
         $submenu	=	Submenu::where('kode', $current[0])->where('menu_id', $this->id);
         return $submenu->first() === null ? '' : 'active open';
     }

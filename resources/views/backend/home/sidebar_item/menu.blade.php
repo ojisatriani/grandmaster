@@ -1,4 +1,4 @@
-<li class="{{ $mn->active(Request::path()) }}">
+<li class="{{ $mn->aktif }}">
     <a href="#" title="{{ $mn->nama }}" data-filter-tags="{{ $mn->nama }}">
         <i class="fa {{ $mn->icon }}"></i>
         <span class="nav-link-text" data-i18n="nav.{{ $mn->kode }}">{{ $mn->nama }}</span>
