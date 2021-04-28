@@ -25,8 +25,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
-        // if (env('APP_ENV') === 'production' || env('APP_ENV') === 'demo') {
-        //     $this->app['request']->server->set('HTTPS', true);
-        // }
+        if (config('app.env') === 'production' || config('app.env') === 'demo') {
+            $this->app['request']->server->set('HTTPS', true);
+        }
     }
 }
