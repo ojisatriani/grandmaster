@@ -6,7 +6,7 @@
 			{!! Form::text('nama', $berkas->nama, array('id' => 'nama', 'class' => 'form-control', 'placeholder' => 'Nama Berkas')) !!}
 		</p>
 		<p>
-			<label for="lampiran" class="col-md-12 control-label">Lampiran (<a href="{{ $berkas->url_berkas }}">Download</a>)</label>
+			<label for="lampiran" class="col-md-12 control-label">Lampiran (<a href="{{ $berkas->file_url }}">Download</a>)</label>
 			{!! Form::file('lampiran', array('id' => 'lampiran', 'class' => 'form-control', 'placeholder' => 'lampiran')) !!}
 			<small>Kosongkan Lampiran jika tidak ingin diubah</small>
 		</p>

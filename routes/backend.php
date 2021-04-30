@@ -57,7 +57,7 @@ Route::group(['prefix' => config('master.url.admin')], function () {
 		//berkas
 		Route::get('berkas/hapus/{id}', 'berkasController@hapus')->name('berkas.hapus');
 		Route::get('berkas/data', 'berkasController@data')->name('berkas.data');
-		Route::get('berkas/download/{id}/{nama}', 'berkasController@download')->name('berkas.download');
+		Route::get('berkas/download/{id}-{nama}', 'berkasController@download')->name('berkas.download');
 		Route::resource('berkas', 'berkasController');
 
 	});

@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use OjiSatriani\Fungsi;
 use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Storage;
 
 class berkasController extends Controller
 {
@@ -21,6 +22,7 @@ class berkasController extends Controller
      */
     public function index()
     {
+        $berkas = Berkas::orderBy('id', 'desc')->get();
         return view('backend.berkas.index');
     }
     public function data(Request $request)
@@ -30,7 +32,7 @@ class berkasController extends Controller
             return Datatables::of($berkas)
             ->addIndexColumn()
             ->addColumn('lampiran', function($berkas){
-                return '<a href="'. $berkas->url_berkas .'">Download</a>';
+                return '<a href="'. $berkas->file_url .'">Download</a>';
             })
             ->addColumn(
                  'action',
@@ -88,15 +90,12 @@ class berkasController extends Controller
             $path       = NULL;
             $namafile   = NULL;
             if($request->hasFile('lampiran')){
-                $path				= 'app/berkas/'.date('Y').'/'.date('m').'/'.date('d').'/';
-                $destinationPath	= storage_path($path);
-                $namafile	        = with(new Fungsi)->namaBaru($request->file('lampiran')->getClientOriginalName(), Str::slug($request->nama.'-'.Carbon::now()));
-                $request->file('lampiran')->move($destinationPath, $namafile);
+                $file = Storage::putFile('berkas/'.date('Y').'/'.date('m').'/'.date('d'),$request->file('lampiran'));
             }
             $request->request->add([
                 'file'  =>  [    
-                                'path'      => $path,
-                                'nama'      => $namafile,
+                                'disk'      => config('filesystems.default'),
+                                'target'    => $file,
                             ],           
             ]);
             if (Berkas::create($request->all())) {
@@ -148,21 +147,16 @@ class berkasController extends Controller
             $respon = array('status'=>false, 'pesan' => $validator->messages());
         } else {
             $berkas = Berkas::find($id);
-            $path       = $berkas->file_path;
-            $namafile   = $berkas->file_nama;
             if($request->hasFile('lampiran')){
                 $berkas->hapus_lampiran();
-                $path				= 'app/berkas/'.date('Y').'/'.date('m').'/'.date('d').'/';
-                $destinationPath	= storage_path($path);
-                $namafile	        = with(new Fungsi)->namaBaru($request->file('lampiran')->getClientOriginalName(), Str::slug($request->nama.'-'.Carbon::now()));
-                $request->file('lampiran')->move($destinationPath, $namafile);
+                $file = Storage::putFile('berkas/'.date('Y').'/'.date('m').'/'.date('d'),$request->file('lampiran'));
+                $request->request->add([
+                            'file'  =>  [    
+                                            'disk'      => config('filesystems.default'),
+                                            'target'    => $file,
+                                        ],           
+                ]);
             }
-            $request->request->add([
-                'file'  =>  [    
-                                'path'      => $path,
-                                'nama'      => $namafile,
-                            ],           
-            ]);
             if (Berkas::find($id)->update($request->all())) {
                 $respon = array('status'=>true, 'pesan' => ['msg' => 'Data berhasil diubah']);
             } else {
@@ -199,6 +193,6 @@ class berkasController extends Controller
     public function download($id,$gbr)
     {
         $berkas = Berkas::find($id);
-        return response()->download($berkas->file_berkas);
+        return $berkas->file_download;
     }
 }

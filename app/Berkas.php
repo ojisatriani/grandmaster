@@ -5,6 +5,9 @@ namespace App;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Storage;
 
 class Berkas extends Model
 {
@@ -24,24 +27,34 @@ class Berkas extends Model
         return $this->hasMany('App\User');
     }
 
-    public function getFileBerkasAttribute()
+    public function getFileTargetAttribute()
     {
-        return storage_path($this->file['path'].'/'.$this->file['nama']);
+        return $this->file['target'];
+    }
+
+    public function getFileDiskAttribute()
+    {
+        return $this->file['disk'] ?? 'default';
     }
 
     public function getFileNamaAttribute()
     {
-        return $this->file['nama'];
+        return Arr::last(Str::of($this->file_target)->explode('/')->toArray());
     }
 
-    public function getFilePathAttribute()
+    public function getFileUrlAttribute()
     {
-        return $this->file['path'];
+        return asset('berkas/download/'.$this->file_nama_alias);
     }
 
-    public function getUrlBerkasAttribute()
+    public function getFileNamaAliasAttribute()
     {
-        return asset('berkas/download/'.$this->id.'/'. $this->file_nama);
+        return $this->id .'-'. Str::slug($this->nama) . '.' .Arr::last(Str::of($this->file_target)->explode('.')->toArray());
+    }
+
+    public function getFileDownloadAttribute()
+    {
+        return Storage::disk($this->file_disk)->download($this->file_target, $this->file_nama_alias);
     }
     
     public static function boot()
@@ -55,12 +68,11 @@ class Berkas extends Model
     public function hapus_lampiran()
     {
         try {
-            if (file_exists($this->file_berkas)) {
-                unlink($this->file_berkas);
+            if (Storage::disk($this->file_disk)->exists($this->file_target)) {
+                Storage::disk($this->file_disk)->delete([$this->file_target]);
             }
         } catch (\Throwable $th) {
             //throw $th;
         }
-        
     }
 }
