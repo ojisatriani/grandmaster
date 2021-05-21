@@ -6,19 +6,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class BolehAksesSubmenu extends Model
+class BolehAksesMenu extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
     protected $dates = ['deleted_at'];
     protected $fillable = [
-        'submenu_id', 'aksesgrup_id'
+        'menu_id', 'aksesgrup_id'
     ];
 
-	public function submenu()
+	public function menu()
 	{
-        return $this->belongsTo('App\Submenu');
+        return $this->belongsTo('App\Menu');
 	}
 
 	public function aksesgrup()

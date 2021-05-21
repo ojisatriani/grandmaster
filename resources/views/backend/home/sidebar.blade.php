@@ -33,21 +33,22 @@
             </a>
         </div>
         <ul id="js-nav-menu" class="nav-menu">
-            <li>
+            {{--  <li>
                 <a href="{{ url('/home') }}" title="Beranda" data-filter-tags="beranda">
                     <i class="fa fa-home"></i>
                     <span class="nav-link-text" data-i18n="nav.beranda">Beranda</span>
                 </a>
-            </li>
-            @foreach($menu_item as $mn)
-                @if($mn->tampil == 1)
-                    @if($mn->checkAksesmenu(Auth::user()->aksesgrup_id))
-                        @include('backend.home.sidebar_item.menu', ['mn'=>$mn])
+            </li>  --}}
+            @each('backend.home.sidebar_menu', $menu_item, 'menu')
+            {{--  @foreach($menu_item as $menu_sidebar)
+                @if($menu_sidebar->tampil)
+                    @if($menu_sidebar->checkAksesmenu(Auth::user()->aksesgrup_id))
+                        @include('backend.home.sidebar_menu', ['menu'=>$menu_sidebar])
                     @endif
                 @else
-                    @include('backend.home.sidebar_item.menu', ['mn'=>$mn])
+                    @include('backend.home.sidebar_menu', ['menu'=>$menu_sidebar])
                 @endif
-            @endforeach
+            @endforeach  --}}
         </ul>
         <div class="filter-message js-filter-message bg-success-600"></div>
     </nav>

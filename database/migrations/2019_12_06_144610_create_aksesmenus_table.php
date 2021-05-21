@@ -15,8 +15,8 @@ class CreateAksesmenusTable extends Migration
     {
         Schema::create('aksesmenus', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('menu_id')->nullable()->constrained()->onDelete('CASCADE');
-            $table->foreignId('aksesgrup_id')->nullable()->constrained()->onDelete('CASCADE');
+            $table->foreignId('menu_id')->nullable()->constrained();
+            $table->foreignId('aksesgrup_id')->nullable()->constrained();
             $table->timestamps();
             $table->softDeletes();
         });

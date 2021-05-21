@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 use App\Aksesgrup;
+use App\Menu;
+use App\Aksesmenu;
 class aksesMenuSeeder extends Seeder
 {
     /**
@@ -12,12 +14,15 @@ class aksesMenuSeeder extends Seeder
     public function run()
     {
         foreach (config('master.aksesgrup') as $key => $value) {
-            $menus    = DB::table('menus')->whereIn('kode', config('master.aksesgrup.'.$key.'.menu'))->get();
-            foreach ($menus as $menu) {
-                $aksesgrup = Aksesgrup::whereAlias($key)->first();
-                if($aksesgrup !== NULL)
+            foreach (config('master.aksesgrup.'. $key) as $kode => $parent) {
+                $menu    = Menu::whereKode($kode)->latest()->first();
+                if($menu !== NULL)
                 {
-                    DB::table('aksesmenus')->insert([['menu_id'=>$menu->id,'aksesgrup_id'=>$aksesgrup->id]]);
+                    $aksesgrup = Aksesgrup::whereAlias($key)->first();
+                    if($aksesgrup !== NULL)
+                    {
+                        Aksesmenu::create(['menu_id'=>$menu->id,'aksesgrup_id'=>$aksesgrup->id]);
+                    }
                 }
             }
         }

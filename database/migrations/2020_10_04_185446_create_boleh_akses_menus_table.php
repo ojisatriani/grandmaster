@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBolehAksesSubmenusTable extends Migration
+class CreateBolehAksesMenusTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateBolehAksesSubmenusTable extends Migration
      */
     public function up()
     {
-        Schema::create('boleh_akses_submenus', function (Blueprint $table) {
+        Schema::create('boleh_akses_menus', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('submenu_id')->nullable()->constrained()->onDelete('CASCADE');
-            $table->foreignId('aksesgrup_id')->nullable()->constrained()->onDelete('CASCADE');
+            $table->foreignId('menu_id')->nullable()->constrained();
+            $table->foreignId('aksesgrup_id')->nullable()->constrained();
             $table->timestamps();
             $table->softDeletes();
         });

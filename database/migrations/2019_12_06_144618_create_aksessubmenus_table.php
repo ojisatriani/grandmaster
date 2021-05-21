@@ -13,13 +13,13 @@ class CreateAksessubmenusTable extends Migration
      */
     public function up()
     {
-        Schema::create('aksessubmenus', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('submenu_id')->nullable()->constrained()->onDelete('CASCADE');
-            $table->foreignId('aksesgrup_id')->nullable()->constrained()->onDelete('CASCADE');
-            $table->timestamps();
-            $table->softDeletes();
-        });
+        // Schema::create('aksessubmenus', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->foreignId('submenu_id')->nullable()->constrained()->onDelete('CASCADE');
+        //     $table->foreignId('aksesgrup_id')->nullable()->constrained()->onDelete('CASCADE');
+        //     $table->timestamps();
+        //     $table->softDeletes();
+        // });
     }
 
     /**
@@ -29,6 +29,6 @@ class CreateAksessubmenusTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('aksessubmenus');
+        // Schema::dropIfExists('aksessubmenus');
     }
 }

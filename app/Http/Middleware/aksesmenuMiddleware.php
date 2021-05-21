@@ -4,10 +4,10 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Route;
-use App\Submenu;
-use App\Aksessubmenu;
+use App\Menu;
+use App\Aksesmenu;
 use Illuminate\Http\Response;
-use App\BolehAksesSubmenu;
+use App\BolehAksesMenu;
 
 class aksesmenuMiddleware
 {
@@ -22,17 +22,17 @@ class aksesmenuMiddleware
     {
         $user			= \Auth::user();
         $current	=	explode(".", Route::currentRouteName());
-        $submenu	=	Submenu::where('kode', $current[0])->first();
+        $submenu	=	Menu::where('kode', $current[0])->first();
         if($submenu !== NULL){
             if($submenu->tampil){
                 $bolehakses = TRUE;
                 if($submenu->perbaikan)
                 {
-                    $bolehakses = BolehAksesSubmenu::whereAksesgrupId(\Auth::user()->aksesgrup_id)->whereSubmenuId($submenu->id)->first() ?? FALSE;
+                    $bolehakses = BolehAksesMenu::whereAksesgrupId(\Auth::user()->aksesgrup_id)->whereMenuId($submenu->id)->first() ?? FALSE;
                 }
                 if($bolehakses)
                 {
-                    $aksessub =  Aksessubmenu::where('aksesgrup_id', $user->aksesgrup_id)->where('submenu_id', $submenu->id);
+                    $aksessub =  Aksesmenu::where('aksesgrup_id', $user->aksesgrup_id)->where('menu_id', $submenu->id);
                     if($aksessub->first()){
                         return $next($request);
                     }else{

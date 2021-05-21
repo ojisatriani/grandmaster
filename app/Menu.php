@@ -11,27 +11,37 @@ class Menu extends Model
 {
     use SoftDeletes, CascadeSoftDeletes;
 
-    protected $cascadeDeletes = ['submenu', 'aksesmenu', 'aksessubmenu'];
+    protected $cascadeDeletes = ['submenu', 'aksesmenu'];
 
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
-        'nama', 'kode', 'link', 'icon', 'status', 'tampil'
+        'nama', 'kode', 'link', 'icon', 'status', 'tampil', 'parent_id', 'perbaikan', 'pengumuman'
     ];
 
-    public function submenu()
+    public function child() // One level child
     {
-        return $this->hasMany('App\Submenu');
+        return $this->hasMany('App\Menu', 'parent_id');
+    }
+
+    public function children() // Recursive children
+    {
+        return $this->child()->with('children');
+    }
+
+    public function parent() // One level parent
+    {
+        return $this->belongsTo('App\Menu', 'parent_id');
+    }
+
+    public function parents() // Recursive parents
+    {
+        return $this->parent()->with('parents');
     }
 
     public function aksesmenu()
     {
         return $this->hasMany('App\Aksesmenu');
-    }
-
-    public function aksessubmenu()
-    {
-        return $this->hasMany('App\Aksessubmenu');
     }
 
     public function checkAksesmenu($aksesgrup_id)
@@ -42,9 +52,15 @@ class Menu extends Model
 
     public function getAktifAttribute()
     {
-        $current	=	explode(".", Route::currentRouteName());
-        $submenu	=	Submenu::where('kode', $current[0])->where('menu_id', $this->id);
-        return $submenu->first() === null ? '' : 'active open';
+        // $submenu	=	Menu::where('kode', $current[0])->whereId($this->id);
+        // return $submenu->first() === null ? '' : 'active open';
+        return '';
+    }
+
+    public function getUrlAttribute()
+    {
+        $url = url(ltrim(config('master.url.admin').'/'.$this->link, '/'));
+        return $this->child->count() < 1 ? $url:'#'.$this->link;
     }
 
     public function generate($menu, $submenu)

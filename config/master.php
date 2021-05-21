@@ -18,16 +18,54 @@ return [
                     ],
     'aksesgrup' =>  [
                         'root'      =>  [
-                                            'menu'      => ['pengaturanroot', 'pengaturan', 'extra'],
-                                            'submenu'   => ['menu', 'user', 'aksesgrup', 'aksesmenu', 'submenu','perbaikan', 'berkas'],
+                                            'pengaturanroot'    => 
+                                                                    [
+                                                                        'parent' => NULL
+                                                                    ],
+                                            'pengaturan'        => 
+                                                                    [
+                                                                        'parent' => NULL
+                                                                    ],
+                                            'extra'             => 
+                                                                    [
+                                                                        'parent' => NULL
+                                                                    ],
+                                            'menu'              => 
+                                                                    [
+                                                                        'parent' => 'pengaturanroot'
+                                                                    ],
+                                            'user'              => 
+                                                                    [
+                                                                        'parent' => 'menu'
+                                                                    ],
+                                            'aksesgrup'         => 
+                                                                    [
+                                                                        'parent' => 'pengaturanroot'
+                                                                    ],
+                                            'aksesmenu'         => 
+                                                                    [
+                                                                        'parent' => 'extra'
+                                                                    ],
+                                            'perbaikan'         => 
+                                                                    [
+                                                                        'parent' => 'extra'
+                                                                    ],
+                                            'berkas'            => 
+                                                                    [
+                                                                        'parent' => 'pengaturan'
+                                                                    ]
                                         ],
                         'admin'     =>  [
-                                            'menu'      => ['extra'],
-                                            'submenu'   => [],
+                                            'extra'             => 
+                                                                    [
+                                                                        'parent' => NULL
+                                                                    ]
                                         ],
                         'user'      =>  [
-                                            'menu'      => ['extra'],
-                                            'submenu'   => [],
+                                            'extra'             => 
+                                                                    [
+                                                                        'parent' => NULL
+                                                                    ]
                                         ],
                     ],
     'level' => [

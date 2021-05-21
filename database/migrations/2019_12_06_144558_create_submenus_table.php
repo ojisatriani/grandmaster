@@ -13,20 +13,20 @@ class CreateSubmenusTable extends Migration
      */
     public function up()
     {
-        Schema::create('submenus', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('menu_id')->nullable()->constrained()->onDelete('CASCADE');
-            $table->string('kode', 50)->unique();
-            $table->string('nama');
-            $table->string('link');
-            $table->string('icon');
-            $table->boolean('status')->default(1);
-            $table->boolean('tampil')->default(1);
-            $table->boolean('perbaikan')->default(0);
-            $table->text('pengumuman')->nullable();
-            $table->timestamps();
-            $table->softDeletes();
-        });
+        // Schema::create('submenus', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->foreignId('menu_id')->nullable()->constrained()->onDelete('CASCADE');
+        //     $table->string('kode', 50)->unique();
+        //     $table->string('nama');
+        //     $table->string('link');
+        //     $table->string('icon');
+        //     $table->boolean('status')->default(1);
+        //     $table->boolean('tampil')->default(1);
+        //     $table->boolean('perbaikan')->default(0);
+        //     $table->text('pengumuman')->nullable();
+        //     $table->timestamps();
+        //     $table->softDeletes();
+        // });
     }
 
     /**
@@ -36,6 +36,6 @@ class CreateSubmenusTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('submenus');
+        // Schema::dropIfExists('submenus');
     }
 }

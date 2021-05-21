@@ -15,12 +15,16 @@ class CreateMenusTable extends Migration
     {
         Schema::create('menus', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('parent_id')->nullable()->constrained('menus');
             $table->string('kode', 50)->unique();
             $table->string('nama');
             $table->string('link');
             $table->string('icon');
             $table->boolean('status')->default(1);
             $table->boolean('tampil')->default(1);
+            $table->boolean('perbaikan')->default(0);
+            $table->text('pengumuman')->nullable();
+            $table->smallInteger('nomor_urut')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

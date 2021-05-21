@@ -24,10 +24,10 @@ class backendMiddleware
     public function handle($request, Closure $next)
     {
         
-        $menus              = Menu::whereStatus(true)->latest()->get();
+        $menus              = Menu::whereStatus(true)->whereNull('parent_id')->latest()->get();
         $current	        = explode(".", \Route::currentRouteName());
-        $submenu            = Submenu::whereKode($current[0])->latest()->first();
-        $halaman            = $submenu === null ? null:$submenu;
+        $menu               = Menu::whereKode($current[0])->latest()->first();
+        $halaman            = $menu === null ? null:$menu;
         $this->fungsi       = new Fungsi;
         $this->tanggal      = Fungsi::setTanggal();
         View::share([

@@ -10,10 +10,10 @@
 Route::get('ojisatriani/{folder}/{file}', 'jsController@backend');
 Route::get('ojisatriani/{folder}/{id}/{file}', 'jsController@backendWithId');
 
-Route::get('/home', 'berandaController@index')->name('beranda.home');
+Route::get('/home', 'berandaController@index')->name('home.home');
 Route::group(['prefix' => config('master.url.admin')], function () {
 	// dashboard - beranda
-	Route::get('/', 'berandaController@index')->name('beranda.index');
+	Route::get('/', 'berandaController@index')->name('home.index');
 	
 	//user ubah password
 	Route::get('user/ubahpassword/{id}', 'userController@ubahpassword')->name('user.ubahpassword');
