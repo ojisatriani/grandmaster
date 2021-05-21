@@ -28,11 +28,6 @@ class Aksesgrup extends Model
         return $this->hasMany('App\Aksesmenu');
     }
 
-    public function aksessubmenu()
-    {
-        return $this->hasMany('App\Aksessubmenu');
-    }
-
     public function setNamaAttribute($value)
     {
         $this->attributes['nama'] = ucwords(trim($value));

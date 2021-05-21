@@ -14,61 +14,7 @@ use Yajra\DataTables\Facades\DataTables;
 
 class aksesmenuController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    public function data(Request $request, $id)
-    {
-        // cek ajax request
-        if ($request->ajax()) {
-            $aksesmenu = Aksesmenu::where('aksesgrup_id', $id)->latest();
-            return Datatables::of($aksesmenu)
-            ->addColumn('nama', function ($aksesmenu) {
-                return $aksesmenu->menu->nama;
-            })
-            ->addColumn('submenu', function ($aksesmenu) {
-                $sub = '';
-                foreach ($aksesmenu->aksesgrup->aksessubmenu as $akses) {
-                    if ($aksesmenu->menu_id == $akses->submenu->menu_id) {
-                        $sub .= $akses->submenu->nama .',';
-                    }
-                }
-                return $sub;
-            })
-            ->rawColumns(['submenu','nama'])->make(true);
-        } else {
-            exit("Not an AJAX request -_-");
-        }
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create($id)
-    {
-        // if (\Auth::user()->as_root == 1) {
-            $menu = Menu::all();
-        // } else {
-        //     $akses = [];
-        //     foreach (\Auth::user()->aksesgrup->aksesmenu as $mn) {
-        //         $akses[] = $mn->menu_id;
-        //     }
-        //     $menu = Menu::whereIn('id', $akses)->get();
-        // }
-
-        $aksesgrup = Aksesgrup::find($id);
-        return view('backend.aksesmenu.tambah', compact('menu', 'aksesgrup'));
-    }
-
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -79,7 +25,7 @@ class aksesmenuController extends Controller
     {
         if ($request->has('menu')) {
             Aksesmenu::where('aksesgrup_id', $request->input('id'))->delete();
-            Aksessubmenu::where('aksesgrup_id', $request->input('id'))->delete();
+            // Aksessubmenu::where('aksesgrup_id', $request->input('id'))->delete();
             $aksesgrupid = $request->input('id');
             $noMenu		= 0;
             $noSubMenu	= 0;
@@ -91,15 +37,7 @@ class aksesmenuController extends Controller
                     $noMenu++;
                 }
             }
-            foreach ($request->input('submenu') as $m => $v) {
-                $aksessubmenu = new Aksessubmenu;
-                $aksessubmenu->submenu_id	= $v;
-                $aksessubmenu->aksesgrup_id		= $aksesgrupid;
-                if ($aksessubmenu->save()) {
-                    $noSubMenu++;
-                }
-            }
-            $respon = array("status"=>true,"pesan"=> ['msg' => $noMenu.' menu, '.$noSubMenu.' submenu tersimpan']);
+            $respon = array("status"=>true,'next_url'=>$request->url, "pesan"=> ['msg' => $noMenu.' menu, '.$noSubMenu.' submenu tersimpan']);
         }
         return (json_encode($respon));
     }
@@ -112,41 +50,10 @@ class aksesmenuController extends Controller
      */
     public function show($id)
     {
-        $aksesgrup = Aksesgrup::find($id);
-        return view('backend.aksesmenu.index', compact('aksesgrup'));
+        $aksesgrup  = Aksesgrup::find($id);
+        $aksesmenu  = Aksesmenu::gabungMenu($id)->get();
+        $menus      = Menu::whereNull('parent_id')->latest()->get();
+        return view('backend.aksesmenu.index', compact('aksesgrup', 'aksesmenu', 'menus'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

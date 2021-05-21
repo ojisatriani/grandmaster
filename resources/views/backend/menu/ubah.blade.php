@@ -3,7 +3,7 @@
 	<div class="col-md-12">
 		<p>
 			{!! Form::label('parent_id', 'Parent Menu', array('class' => 'col-md-6 control-label')) !!}
-			{!! Form::select('parent_id', $parent, $menu->parent_id, array('id' => 'parent_id', 'class' => 'form-control')) !!}
+			{!! Form::select('parent_id', $parent, $menu->parent_id, array('id' => 'parent_id', 'class' => 'form-control', 'placeholder' => 'Pilih Parent Menu')) !!}
 		</p>
 	</div>
 	<div class="col-md-6">

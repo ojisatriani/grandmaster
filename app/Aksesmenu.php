@@ -24,4 +24,12 @@ class Aksesmenu extends Model
     {
         return $this->belongsTo('App\Aksesgrup');
     }
+
+    public function scopeGabungMenu($query, $id)
+    {
+        return $query->rightJoin('menus','aksesmenus.menu_id', '=','menus.id')
+        ->whereNull('menus.parent_id')
+        ->where('aksesmenus.aksesgrup_id', $id)
+        ->select('aksesmenus.*', 'menus.nama');
+    }
 }
