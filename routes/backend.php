@@ -29,13 +29,13 @@ Route::group(['prefix' => config('master.url.admin')], function () {
 		
 		//menu
 		Route::get('menu/hapus/{id}', 'menuController@hapus')->name('menu.hapus');
-		Route::get('menu/data', 'menuController@data')->name('menu.data');
+		Route::get('menu/data/{parent_id?}', 'menuController@data')->name('menu.data');
 		Route::resource('menu', 'menuController');
 
-		//submenu
-		Route::get('submenu/hapus/{id}', 'submenuController@hapus')->name('submenu.hapus');
-		Route::get('submenu/data/{id}', 'submenuController@data')->name('submenu.data');
-		Route::resource('submenu', 'submenuController');
+		// //submenu
+		// Route::get('submenu/hapus/{id}', 'submenuController@hapus')->name('submenu.hapus');
+		// Route::get('submenu/data/{id}', 'submenuController@data')->name('submenu.data');
+		// Route::resource('submenu', 'submenuController');
 
 		//aksesgrup
 		Route::get('aksesgrup/hapus/{id}', 'aksesgrupController@hapus')->name('aksesgrup.hapus');

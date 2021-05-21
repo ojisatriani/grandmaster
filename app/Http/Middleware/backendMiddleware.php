@@ -24,7 +24,7 @@ class backendMiddleware
     public function handle($request, Closure $next)
     {
         
-        $menus              = Menu::whereStatus(true)->whereNull('parent_id')->latest()->get();
+        $menus              = Menu::whereTampilkan(true)->whereNull('parent_id')->latest()->get();
         $current	        = explode(".", \Route::currentRouteName());
         $menu               = Menu::whereKode($current[0])->latest()->first();
         $halaman            = $menu === null ? null:$menu;

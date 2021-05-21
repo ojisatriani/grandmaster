@@ -21,95 +21,87 @@ class menuSeeder extends Seeder
 						'nama' 			=> 'Beranda',
 						'link' 			=> 'home',
 						'icon' 			=> 'fa-home',
-						'status' 		=> 1,
-						'tampil' 		=> 0,
+						'tampilkan' 	=> 1,
+						'private' 		=> 0,
 					],
 					[
 						'kode' 			=> 'pengaturanroot', // 2
 						'nama' 			=> 'Pengaturan Root',
 						'link' 			=> 'pengaturanroot',
 						'icon' 			=> 'fa-android',
-						'status' 		=> 1,
-						'tampil' 		=> 1,
+						'tampilkan' 	=> 1,
+						'private' 		=> 1,
 					],
 					[
 						'kode' 			=> 'pengaturan', // 3
 						'nama' 			=> 'Pengaturan',
 						'link' 			=> 'Pengaturan',
 						'icon' 			=> 'fa-cogs',
-						'status' 		=> 1,
-						'tampil' 		=> 1,
-					],
-					[
-						'kode' 			=> 'extra', // 4
-						'nama' 			=> 'extra',
-						'link' 			=> 'extra',
-						'icon' 			=> 'fa-cogs',
-						'status' 		=> 0,
-						'tampil' 		=> 1,
+						'tampilkan' 	=> 1,
+						'private' 		=> 1,
 					],
 					[
 					  'parent_id'		=> 2,  //pengaturan root
-					  'kode'			=> 'menu',
+					  'kode'			=> 'menu', //4
 					  'nama'			=> 'Menu',
 					  'link'			=> 'menu',
 					  'icon'			=> 'fa-cogs',
-					  'status'			=> 1,
-					  'tampil'			=> 1,
-					],
-					[
-					  'parent_id'		=> 5, //pengaturan root
-					  'kode'			=> 'user',
-					  'nama'			=> 'User',
-					  'link'			=> 'user',
-					  'icon'			=> 'fa-users',
-					  'status'			=> 1,
-					  'tampil'			=> 1,
+					  'tampilkan'		=> 1,
+					  'private'			=> 1,
 					],
 					[
 					  'parent_id'		=> 2, //pengaturan root
-					  'kode'			=> 'aksesgrup',
+					  'kode'			=> 'user', //5
+					  'nama'			=> 'User',
+					  'link'			=> 'user',
+					  'icon'			=> 'fa-users',
+					  'tampilkan'		=> 1,
+					  'private'			=> 1,
+					],
+					[
+					  'parent_id'		=> 2, //pengaturan root
+					  'kode'			=> 'aksesgrup', //6
 					  'nama'			=> 'Akses Grup',
 					  'link'			=> 'aksesgrup',
 					  'icon'			=> 'fa-arrow-circle-right',
-					  'status'			=> 1,
-					  'tampil'			=> 1,
+					  'tampilkan'		=> 1,
+					  'private'			=> 1,
 					],
 					[
-						'parent_id'		=> 4, //extra
-						'kode'			=> 'aksesmenu',
+						'parent_id'		=> 6, //aksesgrup
+						'kode'			=> 'aksesmenu', // 7
 						'nama'			=> 'Aksesmenu',
 						'link'			=> 'aksesmenu',
 						'icon' 			=> 'fa-arrow-circle-right',
-						'status'		=> 0,
-						'tampil'		=> 1,
+						'tampilkan'		=> 0,
+						'private'		=> 1,
 					],
 					[
-						'parent_id'		=> 4, //extra
-						'kode'			=> 'submenu',
+						'parent_id'		=> 4, //menu
+						'kode'			=> 'submenu', // 8
 						'nama'			=> 'Submenu',
 						'link'			=> 'submenu',
 						'icon'			=> 'fa-arrow-circle-right',
-						'status'		=> 0,
-						'tampil'		=> 1,
+						'tampilkan'		=> 0,
+						'private'		=> 1,
 					],
 					[
-						'parent_id'		=> 4, //extra
-						'kode'			=> 'perbaikan',
+						'parent_id'		=> 4, //menu
+						'kode'			=> 'perbaikan', // 9
 						'nama'			=> 'Perbaikan',
 						'link'			=> 'perbaikan',
 						'icon'			=> 'fa-arrow-circle-right',
-						'status'		=> 0,
-						'tampil'		=> 1,
+						'tampilkan'		=> 0,
+						'private'		=> 1,
 					],
 					[
 						'parent_id'		=> 3, //pengaturan
-						'kode'			=> 'berkas',
+						'kode'			=> 'berkas', // 10
 						'nama'			=> 'Berkas',
 						'link'			=> 'berkas',
 						'icon'			=> 'fa-archive',
-						'status'		=> 1,
-						'tampil'		=> 1,
+						'tampilkan'		=> 1,
+						'private'		=> 1,
 					],
 				];
 		foreach ($isi as $data) {

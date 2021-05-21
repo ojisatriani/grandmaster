@@ -26,10 +26,6 @@ return [
                                                                     [
                                                                         'parent' => NULL
                                                                     ],
-                                            'extra'             => 
-                                                                    [
-                                                                        'parent' => NULL
-                                                                    ],
                                             'menu'              => 
                                                                     [
                                                                         'parent' => 'pengaturanroot'
@@ -44,11 +40,15 @@ return [
                                                                     ],
                                             'aksesmenu'         => 
                                                                     [
-                                                                        'parent' => 'extra'
+                                                                        'parent' => 'aksesgrup'
+                                                                    ],
+                                            'submenu'         => 
+                                                                    [
+                                                                        'parent' => 'menu'
                                                                     ],
                                             'perbaikan'         => 
                                                                     [
-                                                                        'parent' => 'extra'
+                                                                        'parent' => 'menu'
                                                                     ],
                                             'berkas'            => 
                                                                     [
@@ -56,16 +56,13 @@ return [
                                                                     ]
                                         ],
                         'admin'     =>  [
-                                            'extra'             => 
+                                            'pengaturan'             => 
                                                                     [
                                                                         'parent' => NULL
                                                                     ]
                                         ],
                         'user'      =>  [
-                                            'extra'             => 
-                                                                    [
-                                                                        'parent' => NULL
-                                                                    ]
+                                            
                                         ],
                     ],
     'level' => [

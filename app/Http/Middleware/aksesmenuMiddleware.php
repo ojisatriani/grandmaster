@@ -20,26 +20,26 @@ class aksesmenuMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $user			= \Auth::user();
+        $user	    = \Auth::user();
         $current	=	explode(".", Route::currentRouteName());
-        $submenu	=	Menu::where('kode', $current[0])->first();
-        if($submenu !== NULL){
-            if($submenu->tampil){
+        $menu	    =	Menu::where('kode', $current[0])->first();
+        if($menu !== NULL){
+            if($menu->private){
                 $bolehakses = TRUE;
-                if($submenu->perbaikan)
+                if($menu->perbaikan)
                 {
-                    $bolehakses = BolehAksesMenu::whereAksesgrupId(\Auth::user()->aksesgrup_id)->whereMenuId($submenu->id)->first() ?? FALSE;
+                    $bolehakses = BolehAksesMenu::whereAksesgrupId(\Auth::user()->aksesgrup_id)->whereMenuId($menu->id)->first() ?? FALSE;
                 }
                 if($bolehakses)
                 {
-                    $aksessub =  Aksesmenu::where('aksesgrup_id', $user->aksesgrup_id)->where('menu_id', $submenu->id);
+                    $aksessub =  Aksesmenu::where('aksesgrup_id', $user->aksesgrup_id)->where('menu_id', $menu->id);
                     if($aksessub->first()){
                         return $next($request);
                     }else{
-                        return new Response(view('backend.home.error.403', ['submenu'=>$submenu]));
+                        return new Response(view('backend.home.error.403', ['submenu'=>$menu]));
                     }
                 } else {
-                    return new Response(view('backend.home.error.503', ['submenu'=>$submenu]));
+                    return new Response(view('backend.home.error.503', ['submenu'=>$menu]));
                 }
             }else{
                 return $next($request);

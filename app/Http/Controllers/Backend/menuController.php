@@ -19,10 +19,11 @@ class menuController extends Controller
     {
         return view('backend.menu.index');
     }
-    public function data(Request $request)
+
+    public function data(Request $request, $parent_id = NULL)
     {
         if ($request->ajax()) {
-            $menu = Menu::latest();
+            $menu = Menu::where('parent_id', $parent_id)->latest();
             return Datatables::of($menu)
             ->addIndexColumn()
             ->addColumn(
@@ -36,13 +37,13 @@ class menuController extends Controller
                               </a>
                           </center>'
                         )
-             ->addColumn('submenu', '<center><a href="{{ url(config("master.url.admin")."/submenu/".$id)  }}" class="paket" data-toggle="tooltip" data-placement="top" title="Submenu"><i class="fa fa-external-link text-info"></i></a>')
-             ->addColumn('tampilkan', function ($menu) {
-                 $status  = $menu->status == 1 ? '<span class="badge badge-pill badge-info">Tampil</span>':'<span class="badge badge-pill badge-danger">Tidak Tampil</span>';
-                 $private = $menu->tampil == 1 ? '<span class="badge badge-pill badge-primary">Private</span>':'<span class="badge badge-pill badge-success">Public</span>';
-                 return '<center>'.$status .'&nbsp;&nbsp;'. $private.'</center>';
+             ->addColumn('submenu', '<center><a href="{{ url(config("master.url.admin")."/menu/".$id)  }}" class="paket" data-toggle="tooltip" data-placement="top" title="Submenu"><i class="fa fa-external-link text-info"></i></a>')
+             ->addColumn('status', function ($menu) {
+                 $tampilkan  = $menu->tampilkan == 1 ? '<span class="badge badge-pill badge-info">Tampil</span>':'<span class="badge badge-pill badge-danger">Tidak Tampil</span>';
+                 $private = $menu->private == 1 ? '<span class="badge badge-pill badge-primary">Private</span>':'<span class="badge badge-pill badge-success">Public</span>';
+                 return '<center>'.$tampilkan .'&nbsp;&nbsp;'. $private.'</center>';
              })
-               ->rawColumns(['tampilkan', 'action', 'submenu'])->make(true);
+               ->rawColumns(['status', 'action', 'submenu'])->make(true);
         } else {
             exit("Not an AJAX request -_-");
         }
@@ -71,8 +72,8 @@ class menuController extends Controller
             'kode'		=> 'required|unique:menus',
             'link'		=> 'required|unique:menus',
             'icon'		=> 'required',
-            'status'	=> 'required',
-            'tampil'	=> 'required',
+            'tampilkan'	=> 'required',
+            'private'	=> 'required',
         ]);
         if ($validator->fails()) {
             $respon = array('status'=>false, 'pesan' => $validator->messages());
@@ -94,7 +95,8 @@ class menuController extends Controller
      */
     public function show($id)
     {
-        //
+        $menu = Menu::find($id);
+        return view('backend.menu.index', compact('menu'));
     }
 
     /**
@@ -106,7 +108,8 @@ class menuController extends Controller
     public function edit($id)
     {
         $menu = Menu::find($id);
-        return view('backend.menu.ubah', ['menu' => $menu]);
+        $parent = Menu::all()->pluck('nama', 'id');
+        return view('backend.menu.ubah', ['menu' => $menu, 'parent'=>$parent]);
     }
 
     /**
@@ -123,8 +126,8 @@ class menuController extends Controller
             'kode'		=> 'required|unique:menus,kode,'.$id,
             'link'		=> 'required|unique:menus,kode,'.$id,
             'icon'		=> 'required',
-            'status'	=> 'required',
-            'tampil'	=> 'required',
+            'tampilkan'	=> 'required',
+            'private'	=> 'required',
         ]);
         if ($validator->fails()) {
             $respon = array('status'=>false, 'pesan' => $validator->messages());

@@ -1,5 +1,11 @@
 {!! Form::open(array('id' => 'frmOji', 'route' => ['menu.update', $menu->id], 'class' => 'form account-form', 'method' => 'PUT')) !!}
 <div class="row">
+	<div class="col-md-12">
+		<p>
+			{!! Form::label('parent_id', 'Parent Menu', array('class' => 'col-md-6 control-label')) !!}
+			{!! Form::select('parent_id', $parent, $menu->parent_id, array('id' => 'parent_id', 'class' => 'form-control')) !!}
+		</p>
+	</div>
 	<div class="col-md-6">
 		<p>
 			{!! Form::label('Nama Menu', 'Nama Menu', array('class' => 'col-md-6 control-label')) !!}
@@ -20,12 +26,12 @@
 			{!! Form::text('icon', $menu->icon, array('id' => 'icon', 'class' => 'form-control', 'placeholder' => 'Icon')) !!}
 		</p>
 		<p>
-			{!! Form::label('Status', 'Status', array('class' => 'col-md-6 control-label')) !!}
-			{!! Form::select('status', array(1 => 'Tampil', 0 => 'Tidak Tampil'), $menu->status, array('id' => 'status', 'class' => 'form-control')) !!}
+			{!! Form::label('tampilkan', 'Tampilkan', array('class' => 'col-md-6 control-label')) !!}
+			{!! Form::select('tampilkan', array(1 => 'Ya', 0 => 'Tidak'), $menu->tampilkan, array('id' => 'status', 'class' => 'form-control')) !!}
 		</p>
 		<p>
-			{!! Form::label('Tampilkan', 'Tampilkan', array('class' => 'col-md-6 control-label')) !!}
-			{!! Form::select('tampil', array(1 => 'Private', 0 => 'Public'), $menu->tampil, array('id' => 'tampil', 'class' => 'form-control')) !!}
+			{!! Form::label('private', 'Status', array('class' => 'col-md-6 control-label')) !!}
+			{!! Form::select('private', array(1 => 'Private', 0 => 'Public'), $menu->private, array('id' => 'private', 'class' => 'form-control')) !!}
 		</p>
 	</div>
 	{!! Form::hidden('table-list', 'datatable', array('id' => 'table-list')) !!}

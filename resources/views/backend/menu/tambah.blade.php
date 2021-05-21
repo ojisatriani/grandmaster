@@ -20,14 +20,15 @@
 			{!! Form::text('icon', 'fa-square', array('id' => 'icon', 'class' => 'form-control', 'placeholder' => 'Icon')) !!}
 		</p>
 		<p>
-			{!! Form::label('status', 'Status', array('class' => 'col-md-6 control-label')) !!}
-			{!! Form::select('status', array(1 => 'Show', 0 => 'Hide'), NULL, array('id' => 'status', 'class' => 'form-control')) !!}
+			{!! Form::label('tampilkan', 'Tampilkan', array('class' => 'col-md-6 control-label')) !!}
+			{!! Form::select('tampilkan', array(1 => 'Ya', 0 => 'Tidak'), NULL, array('id' => 'status', 'class' => 'form-control')) !!}
 		</p>
 		<p>
-			{!! Form::label('tampil', 'Tampilkan', array('class' => 'col-md-6 control-label')) !!}
-			{!! Form::select('tampil', array(1 => 'Private', 0 => 'Public'), NULL, array('id' => 'tampil', 'class' => 'form-control')) !!}
+			{!! Form::label('private', 'Status', array('class' => 'col-md-6 control-label')) !!}
+			{!! Form::select('private', array(1 => 'Private', 0 => 'Public'), NULL, array('id' => 'tampil', 'class' => 'form-control')) !!}
 		</p>
 	</div>
+	{!! Form::hidden('parent_id', NULL, array('id' => 'parent_id')) !!}
 	{!! Form::hidden('table-list', 'datatable', array('id' => 'table-list')) !!}
 </div>
 <div class="row">

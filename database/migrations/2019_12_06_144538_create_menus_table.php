@@ -20,8 +20,8 @@ class CreateMenusTable extends Migration
             $table->string('nama');
             $table->string('link');
             $table->string('icon');
-            $table->boolean('status')->default(1);
-            $table->boolean('tampil')->default(1);
+            $table->boolean('tampilkan')->default(1);
+            $table->boolean('private')->default(1);
             $table->boolean('perbaikan')->default(0);
             $table->text('pengumuman')->nullable();
             $table->smallInteger('nomor_urut')->default(0);

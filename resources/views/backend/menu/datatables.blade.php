@@ -39,12 +39,12 @@ $(document).ready(function() {
 		],
 		processing: true,
 		serverSide: true,
-		ajax: "{{ url($url_admin.'/menu/data') }}",
+		ajax: "{{ url($url_admin.'/menu/data/'.($id ?? NULL)) }}",
 		columns: [
 					{ data: 'nama' },
 					{ data: 'kode', searchable: false, orderable:false },
 					{ data: 'link', searchable: false, orderable:false },
-					{ data: 'tampilkan', searchable: false, orderable:false, },
+					{ data: 'status', searchable: false, orderable:false, },
 					{ data: 'submenu', searchable: false, orderable:false, },
 					{ data: 'action', orderable: false, searchable: false}
 				],

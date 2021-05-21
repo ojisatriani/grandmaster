@@ -1,5 +1,6 @@
 $(document).ready(function(){
    $('.tambah').click(function(){
+	   	var parentid = $(this).attr('parent-id');
 		ojisatrianiLoadingFadeIn();
 		$.loadmodal({
 			url: "{{ url($url_admin.'/menu/create') }}",
@@ -16,7 +17,8 @@ $(document).ready(function(){
 				dataType: 'html',
 				method: 'GET',
 				success: function(data, status, xhr){
-            ojisatrianiLoadingFadeOut();
+	            $("#parent_id").val(parentid);
+            		ojisatrianiLoadingFadeOut();
 				},
 
 			},

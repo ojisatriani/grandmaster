@@ -11,12 +11,12 @@ class Menu extends Model
 {
     use SoftDeletes, CascadeSoftDeletes;
 
-    protected $cascadeDeletes = ['submenu', 'aksesmenu'];
+    protected $cascadeDeletes = ['aksesmenu'];
 
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
-        'nama', 'kode', 'link', 'icon', 'status', 'tampil', 'parent_id', 'perbaikan', 'pengumuman'
+        'nama', 'kode', 'link', 'icon', 'tampilkan', 'private', 'parent_id', 'perbaikan', 'pengumuman'
     ];
 
     public function child() // One level child
@@ -60,7 +60,18 @@ class Menu extends Model
     public function getUrlAttribute()
     {
         $url = url(ltrim(config('master.url.admin').'/'.$this->link, '/'));
-        return $this->child->count() < 1 ? $url:'#'.$this->link;
+        return $this->punya_sub ? '#'.$this->link:$url;
+    }
+
+    public function getPunyaSubAttribute()
+    {
+        $sub = Menu::whereParentId($this->id)->whereTampilkan(1)->first();
+        if($this->child->count() > 0 && $sub !== NULL)
+        {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
     }
 
     public function generate($menu, $submenu)
